@@ -15,7 +15,8 @@ So, instead of this happening::
 	File "<stdin>", line 1, in <module>
 	IOError: [Errno 2] No such file or directory: 'this is a filename with some invalid characters in it <>:"/\\|?*'  
 
-Do this::  
+Do this:: 
+	>>> from goldfinch import validFileName as vfn
 	>>> fileName = 'this is a filename with some invalid characters in it <>:"/\|?*' 
 	>>> file = open(vfn(fileName),"w")  
 
