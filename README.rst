@@ -8,14 +8,14 @@ In general, goldfinch will remove invalid filename characters like <>:"/\|?* and
   
 The only real usecase for this package is when one creates filenames on the fly and there is no way of knowing what exactly will be passed as the filename.  I find it particularly useful when I scrape websites.  
 
-So, instead of this happening:: 
+So, instead of this happening: 
 	>>> fileName = 'this is a filename with some invalid characters in it <>:"/\|?*'
 	>>> file = open(fileName,"w")
 	Traceback (most recent call last):
 	File "<stdin>", line 1, in <module>
 	IOError: [Errno 2] No such file or directory: 'this is a filename with some invalid characters in it <>:"/\\|?*'  
 
-Do this:: 
+Do this: 
 	>>> from goldfinch import validFileName as vfn
 	>>> fileName = 'this is a filename with some invalid characters in it <>:"/\|?*' 
 	>>> file = open(vfn(fileName),"w")  
