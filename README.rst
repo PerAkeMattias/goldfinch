@@ -1,9 +1,11 @@
-<b>About</b>  
+**About** 
+ 
 goldfinch is simple package which removes invalid filename characters from a filename.  Pass in a string or unicode (with or without invalid characters) and get valid filename returned (as unicode).  
 
 In general, goldfinch will remove invalid filename characters like <>:"/\|?* and characters above the 0-255 character set.  The default is is to attempt to convert to ascii characters using _unicodedata_. 
 
-<b>Why use goldfinch</b>  
+**Why use goldfinch**
+  
 The only real usecase for this package is when one creates filenames on the fly and there is no way of knowing what exactly will be passed as the filename.  I find it particularly useful when I scrape websites.  
 
 So, instead of this happening:: 
@@ -17,7 +19,8 @@ Do this::
 	>>> fileName = 'this is a filename with some invalid characters in it <>:"/\|?*' 
 	>>> file = open(vfn(fileName),"w")  
 
-<b>Examples</b>  
+**Examples**  
+  
 There are three (space, initCap, and ascii) options available when normalizing a filename.  
 The default is 'space="underscore", initCap=True, ascii=True'.  
 - For space the options are underscore, remove, and keep.  The default is underscore which will replace a space with an underscore (_).
@@ -41,4 +44,3 @@ With initCap = False::
 With space = 'remove': : 
 	>>> vfn(fileName, space = 'remove')   
 	'ThisIsAFilenameWithAaaaoSomeCharactersThatWillNotWorkLikeThese'
-
