@@ -5,8 +5,8 @@ def readme():
         return f.read()
 
 setup(name='goldfinch',
-      version='0.3',
-      description='Use to make sure that filenames will always be valid',
+      version='0.4',
+      description='Use to make sure that filenames will always be valid- Now in Python 3 too',
       url='https://github.com/PerAkeMattias/goldfinch',
       author='Per Ake Mattias',
       author_email='PerAkeMattias@gmail.com',
