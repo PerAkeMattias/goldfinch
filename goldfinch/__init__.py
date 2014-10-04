@@ -36,6 +36,29 @@ def validFileName(inputName, space="underscore", initCap=True, ascii=True):
             reservedCharacters = '<>:"/\|?*'
             for character in reservedCharacters: 
                 characters = characters.replace(character, "")
+            
+            validName = ''.join(char for char in inputName if char in characters)
+        
+        
+            if ascii == True:
+                validName = unicodedata.normalize('NFKD', validName).encode('ascii','ignore')
+            elif ascii == False:
+                pass
+        
+            if initCap == True:
+                validName = string.capwords(validName)
+            elif initCap == False:
+                pass
+        
+            if space == 'remove':
+                validName = validName.replace(' ','')
+            elif space == 'underscore':
+                validName = validName.replace(' ','_')
+            elif space == 'keep':
+                pass
+            
+            if isinstance(validName, str) == True:
+                validName = validName.decode('UTF-8')
                     
         if sys.version_info[0] == 3:
             if isinstance(inputName, str) == True:
@@ -44,33 +67,43 @@ def validFileName(inputName, space="underscore", initCap=True, ascii=True):
                 raise TypeError
                 
             characters = ''.join(chr(i) for i in range(255))
-            print(characters)
             reservedCharacters = '<>:"/\|?*'
             for character in reservedCharacters: 
                 characters = characters.replace(character, "")
             
-        validName = ''.join(char for char in inputName if char in characters)
+            validName = ''.join(char for char in inputName if char in characters)
         
-        if ascii == True:
-            validName = unicodedata.normalize('NFKD', validName).encode('ascii','ignore')
-        elif ascii == False:
-            pass
+            if ascii == True:
+                validName = unicodedata.normalize('NFKD', validName).encode('ascii','ignore')
+            elif ascii == False:
+                pass
         
-        if initCap == True:
-            validName = string.capwords(validName)
-        elif initCap == False:
-            pass
+            if initCap == True:
+                if isinstance(validName, str) == True:
+                    validName = string.capwords(validName)
+                else:
+                    validName = bytes.title(validName)
+            elif initCap == False:
+                pass
         
-        if space == 'remove':
-            validName = validName.replace(' ','')
-        elif space == 'underscore':
-            validName = validName.replace(' ','_')
-        elif space == 'keep':
-            pass
+            if space == 'remove':
+                if isinstance(validName, str) == True:
+                    validName = validName.replace(' ','')
+                else:
+                    validName = validName.replace(b' ',b'')
+            elif space == 'underscore':
+                if isinstance(validName, str) == True:
+                    validName = validName.replace(' ','_')
+                else:
+                    validName = validName.replace(b' ',b'_')
+            elif space == 'keep':
+                pass
+            
+            if isinstance(validName, str) == True:
+                validName = bytes(validName, encoding="UTF-8")
         
         return validName
     except TypeError:
         errMsg = 'Accepted input is str or unicode, you passed a {}'.format(type(inputName))
         print(errMsg)
         return
-
